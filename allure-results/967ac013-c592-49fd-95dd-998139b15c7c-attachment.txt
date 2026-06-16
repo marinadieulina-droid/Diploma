@@ -1,0 +1,6 @@
+[START] test_tracking_input
+[INFO] Tracking page loaded.
+[INFO] Checking for cookie banner...
+[SUCCESS] Cookies accepted successfully.
+[DATA] Expected: 20157771913 | Actual entered: 20157771913
+[SUCCESS] test_tracking_input passed.

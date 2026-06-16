@@ -1,0 +1,7 @@
+[SUCCESS] Primary cookies accepted.
+[SUCCESS] Secondary cookies inside Shadow DOM accepted.
+[INFO] Кнопка геолокации успешно нажата.
+[INFO] Нажата кнопка открытия фильтров.
+[INFO] Раскрыта категория 'Typ místa'.
+[INFO] Панель фильтров закрыта.
+[SUCCESS] Тест успешно пройден стандартными методами Selenium!

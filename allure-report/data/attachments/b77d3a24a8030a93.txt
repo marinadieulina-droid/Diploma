@@ -1,0 +1,8 @@
+[START] test_valid_tracking_number
+[INFO] Checking for cookie banner...
+[SUCCESS] Cookies accepted successfully.
+[INFO] Tracking number '20157771913' populated.
+[INFO] Search button triggered.
+[DATA] Header text found: 'Stav vaší zásilky'
+[DATA] Current landing URL: https://www.ppl.cz/vyhledat-zasilku?shipmentId=20157771913
+[SUCCESS] test_valid_tracking_number passed.

@@ -40,31 +40,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Python tests in test_404.py.executor": "Run",
-    "Python tests.Python tests in test_homepage.py.executor": "Run",
-    "Python tests.Python tests in test_language_switch.py.executor": "Run",
-    "Python tests.Python tests in test_logo.py.executor": "Run",
-    "Python tests.Python tests in test_map_features.py.executor": "Run",
-    "Python tests.Python tests in test_map_filters.py.executor": "Run",
-    "Python tests.Python tests in test_meta_tegs.py.executor": "Run",
-    "Python tests.Python tests in test_navigation.py.executor": "Run",
-    "Python tests.Python tests in test_pickup_points.py.executor": "Run",
-    "Python tests.Python tests in test_search_field.py.executor": "Run",
-    "Python tests.Python tests in test_tracking.py.executor": "Run",
-    "Python.conftest.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests in test_404.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_homepage.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_language_switch.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_logo.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_map_features.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_map_filters.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_meta_tegs.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_navigation.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_pickup_points.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_search_field.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_tracking.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.conftest.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python tests.Python tests in test_map_features.py">
     <configuration name="conftest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="diploma" />

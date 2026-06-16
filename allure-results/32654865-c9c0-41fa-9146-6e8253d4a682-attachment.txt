@@ -1,0 +1,6 @@
+[START] test_invalid_format_tracking_number
+[INFO] Checking for cookie banner...
+[SUCCESS] Cookies accepted successfully.
+[INFO] Value with wrong format 'ABC123!!!' typed.
+[DATA] Extracted validation tip: 'Povoleny jsou pouze číslice a velká a malá písmena'
+[SUCCESS] test_invalid_format_tracking_number passed.

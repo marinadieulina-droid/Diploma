@@ -1,0 +1,6 @@
+[START] test_invalid_tracking_number
+[INFO] Checking for cookie banner...
+[SUCCESS] Cookies accepted successfully.
+[INFO] Invalid ID '0000000000' entered.
+[DATA] Extracted error message text: 'Zásilka nenalezena'
+[SUCCESS] test_invalid_tracking_number passed.

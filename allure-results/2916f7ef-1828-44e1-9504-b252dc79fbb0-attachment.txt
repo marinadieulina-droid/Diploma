@@ -1,0 +1,13 @@
+[START] test_shipment_details
+[INFO] Navigating to tracking page...
+[INFO] Checking for cookie banner...
+[SUCCESS] Cookies accepted successfully.
+[INFO] Waiting for tracking input field...
+[INFO] Valid shipment ID '20157771913' entered.
+[INFO] Search form submitted via JS click.
+[SUCCESS] Page with shipment status loaded successfully.
+[INFO] 'Detail zásilky' accordion expanded via JS.
+[SUCCESS] Elements 'Odesílatel', 'Referenční číslo', 'Váha' are visible.
+[INFO] 'Detail stavu zásilky' accordion expanded via JS.
+[SUCCESS] Status table elements 'Datum a čas' and 'Stav zásilky' are visible.
+[SUCCESS] test_shipment_details passed.
