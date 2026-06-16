@@ -1,7 +1,0 @@
-Menu items found: 6
-URL: https://www.ppl.cz/o-nas
-URL: https://www.ppl.cz/vyhledat-zasilku
-URL: https://www.ppl.cz/poslat-zasilku
-URL: https://ppl.jobs.cz/
-URL: https://www.ppl.cz/zakaznicky-servis
-URL: https://www.ppl.cz/vyhledavani
