@@ -1,0 +1,30 @@
+[START] test_search_field_displayed
+[INFO] Checking for primary cookie banner...
+[SUCCESS] Primary cookies accepted.
+[INFO] Waiting for map widget to mount in DOM...
+[INFO] Shadow DOM cookie handler skipped or finished: Message: no such shadow root: shadow root not found
+  (Session info: chrome=148.0.7778.179)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff6aff67de5+14895]
+	chromedriver!GetHandleVerifier [0x7ff6aff67e50+14900]
+	chromedriver!(No symbol) [0x7ff6afccd5ad]
+	chromedriver!(No symbol) [0x7ff6afd1b99f]
+	chromedriver!(No symbol) [0x7ff6afd5005a]
+	chromedriver!(No symbol) [0x7ff6afd1b566]
+	chromedriver!(No symbol) [0x7ff6afd7486f]
+	chromedriver!(No symbol) [0x7ff6afd19df8]
+	chromedriver!(No symbol) [0x7ff6afd1ace3]
+	chromedriver!GetHandleVerifier [0x7ff6b027cc49+3296f9]
+	chromedriver!GetHandleVerifier [0x7ff6b0277375+323e25]
+	chromedriver!GetHandleVerifier [0x7ff6b029bc82+348732]
+	chromedriver!GetHandleVerifier [0x7ff6aff86045+32af5]
+	chromedriver!GetHandleVerifier [0x7ff6aff8ecec+3b79c]
+	chromedriver!GetHandleVerifier [0x7ff6aff71bc4+1e674]
+	chromedriver!GetHandleVerifier [0x7ff6aff71d54+1e804]
+	chromedriver!GetHandleVerifier [0x7ff6aff560e7+2b97]
+	KERNEL32!BaseThreadInitThunk [0x7ffd28e67ac4+14]
+	ntdll!RtlUserThreadStart [0x7ffd2a89a8c1+21]
+
+[INFO] Fetching search input field from Shadow DOM...
+[SUCCESS] Map search field located inside Shadow DOM.
+[SUCCESS] test_search_field_displayed passed.
