@@ -1,0 +1,32 @@
+[START] test_search_by_city
+[INFO] Checking for primary cookie banner...
+[SUCCESS] Primary cookies accepted.
+[INFO] Waiting for map widget to mount in DOM...
+[INFO] Shadow DOM cookie handler skipped or finished: Message: no such shadow root: shadow root not found
+  (Session info: chrome=148.0.7778.179)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff68f437de5+14895]
+	chromedriver!GetHandleVerifier [0x7ff68f437e50+14900]
+	chromedriver!(No symbol) [0x7ff68f19d5ad]
+	chromedriver!(No symbol) [0x7ff68f1eb99f]
+	chromedriver!(No symbol) [0x7ff68f22005a]
+	chromedriver!(No symbol) [0x7ff68f1eb566]
+	chromedriver!(No symbol) [0x7ff68f24486f]
+	chromedriver!(No symbol) [0x7ff68f1e9df8]
+	chromedriver!(No symbol) [0x7ff68f1eace3]
+	chromedriver!GetHandleVerifier [0x7ff68f74cc49+3296f9]
+	chromedriver!GetHandleVerifier [0x7ff68f747375+323e25]
+	chromedriver!GetHandleVerifier [0x7ff68f76bc82+348732]
+	chromedriver!GetHandleVerifier [0x7ff68f456045+32af5]
+	chromedriver!GetHandleVerifier [0x7ff68f45ecec+3b79c]
+	chromedriver!GetHandleVerifier [0x7ff68f441bc4+1e674]
+	chromedriver!GetHandleVerifier [0x7ff68f441d54+1e804]
+	chromedriver!GetHandleVerifier [0x7ff68f4260e7+2b97]
+	KERNEL32!BaseThreadInitThunk [0x7ffd28e67ac4+14]
+	ntdll!RtlUserThreadStart [0x7ffd2a89a8c1+21]
+
+[INFO] Fetching search input field from Shadow DOM...
+[SUCCESS] Map search field located inside Shadow DOM.
+[INFO] City value 'Praha' sent to input field.
+[DATA] Expected: Praha | Actual value in field: Praha
+[SUCCESS] test_search_by_city passed.
