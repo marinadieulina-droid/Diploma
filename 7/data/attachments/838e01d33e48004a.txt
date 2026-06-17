@@ -1,0 +1,4 @@
+
+[INFO] Старт теста: Проверка Open Graph URL (og:url).
+[INFO] Получен Open Graph URL: 'https://www.ppl.cz'
+[SUCCESS] Тег og:url успешно проверен.
