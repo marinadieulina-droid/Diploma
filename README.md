@@ -4,9 +4,8 @@
 
 This diploma project demonstrates the development of an automated testing framework for the PPL CZ web application.
 
-The framework was created to support Quality Assurance activities by automating functional and regression testing of the system. The solution is implemented using Python, Selenium WebDriver, Pytest, and Allure Report following the Page Object Model (POM) design pattern.
-
----
+The framework was created to support Quality Assurance activities by automating functional and regression testing of the system. 
+The solution is implemented using Python, Selenium WebDriver, Pytest, and Allure Report following the Page Object Model (POM) design pattern.
 
 ## Project Objectives
 
@@ -18,8 +17,6 @@ The main objectives of the project are:
 * Increase test coverage of critical business functionality.
 * Provide clear and detailed test reporting.
 
----
-
 ## Technologies Used
 
 * Python 3.13
@@ -29,22 +26,20 @@ The main objectives of the project are:
 * Git
 * GitHub
 
----
-
 ## Test Architecture
 
-The framework follows the Page Object Model (POM) design pattern.
+The framework follows the Page Object Model (POM) design pattern and integrates modern CI/CD practices.
 
 Project structure:
 
 * **pages/** – page objects and business logic.
-* **locators/** – element locators.
 * **tests/** – automated test scenarios.
 * **conftest.py** – browser setup and test fixtures.
+* **pytest.ini** – test framework configuration.
 * **allure-results/** – raw test execution results.
 * **allure-report/** – generated test reports.
-
----
+* **.github/workflows/** – CI/CD configuration files for automated testing.
+* **gh-pages** – branch dedicated to hosting the Allure test reports.
 
 ## Implemented Features
 
@@ -57,12 +52,11 @@ The framework includes:
 * Shadow DOM handling.
 * JavaScript-based interactions for complex UI components.
 * Allure reporting and analytics.
-
----
+* CI/CD integration with GitHub Actions.
 
 ## Test Coverage
 
-The project currently contains automated test cases covering:
+The project currently contains 17 automated test cases covering:
 
 * Homepage functionality.
 * Website navigation.
@@ -73,41 +67,30 @@ The project currently contains automated test cases covering:
 * Map filters and geolocation.
 * Meta tags validation.
 * Error page validation (404).
-* Other critical user workflows.
-
----
 
 ## Running Tests
-
 Execute all tests:
-
-```bash
+```
 pytest
 ```
 
-Generate Allure results:
-
-```bash
+## Generate Allure results:
+```
 pytest --alluredir=allure-results
 ```
 
----
-
 ## Generating Allure Report
-
 Generate report:
-
-```bash
+```
 allure generate allure-results --clean -o allure-report
+
 ```
 
 Open report locally:
-
-```bash
-allure open allure-report
 ```
+allure open allure-report
 
----
+```
 
 ## Test Results
 
@@ -115,8 +98,8 @@ All test executions are documented using Allure Report.
 
 Current project status:
 
-* Total automated tests: 20
-* Passed: 20
+* Total automated tests: 17
+* Passed: 17
 * Failed: 0
 
 ---
@@ -125,15 +108,15 @@ Current project status:
 
 GitHub Repository:
 
-https://github.com/marinadieulina-droid/Diploma
+[https://github.com/marinadieulina-droid/Diploma](https://github.com/marinadieulina-droid/Diploma)
 
 Allure Report:
 
-https://marinadieulina-droid.github.io/Diploma/
+[https://marinadieulina-droid.github.io/Diploma/](https://marinadieulina-droid.github.io/Diploma/)
 
----
 
 ## Author
+
 Marina Dieulina
 
 Diploma Thesis – QA Engineering and Test Automation
