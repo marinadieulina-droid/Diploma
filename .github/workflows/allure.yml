@@ -11,6 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # 1. Установка Chrome и ChromeDriver
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -20,8 +26,12 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      # 2. Запуск тестов
+      # Добавляем переменные окружения, чтобы ваши тесты знали, что работают в CI
       - name: Run tests
         run: pytest --alluredir=allure-results
+        env:
+          HEADLESS: "true"
 
       - name: Get Allure history
         uses: actions/checkout@v3
