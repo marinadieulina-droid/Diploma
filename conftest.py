@@ -1,16 +1,21 @@
 import pytest
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def driver():
+    options = Options()
 
-    options = webdriver.ChromeOptions()
+    # Настройки для сервера (GitHub Actions)
+    options.add_argument("--headless")  # Запуск без графического интерфейса
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--window-size=1920,1080")
 
-    # Разрешаем геолокацию
+    # Ваши настройки геолокации
     options.add_experimental_option(
         "prefs",
         {
@@ -18,14 +23,11 @@ def driver():
         }
     )
 
-    driver = webdriver.Chrome(
-        service=Service(
-            ChromeDriverManager().install()
-        ),
-        options=options
-    )
+    # Инициализация драйвера
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
 
-    # Разрешение геолокации для ppl.cz
+    # Разрешение геолокации и установка координат Праги
     driver.execute_cdp_cmd(
         "Browser.grantPermissions",
         {
@@ -33,8 +35,6 @@ def driver():
             "permissions": ["geolocation"]
         }
     )
-
-    # Подставляем координаты Праги
     driver.execute_cdp_cmd(
         "Emulation.setGeolocationOverride",
         {
@@ -44,8 +44,5 @@ def driver():
         }
     )
 
-    driver.maximize_window()
-
     yield driver
-
     driver.quit()
