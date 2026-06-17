@@ -1,0 +1,5 @@
+
+[START] test_search_field_displayed
+[SUCCESS] Primary cookies accepted.
+[SUCCESS] Secondary cookies inside Shadow DOM accepted.
+[SUCCESS] Поле поиска отображается на карте.
