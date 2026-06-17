@@ -1,39 +1,35 @@
 import allure
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from pages.homepage_page import HomepagePage
 
 
 @allure.feature("Localization")
 @allure.story("Language Switch")
 @allure.title("Verify language selector works")
 def test_language_switch(driver):
+    print("\n[INFO] Старт теста: Проверка локализации и селектора языков.")
+
+    # Создаем объект страницы
+    page = HomepagePage(driver)
 
     with allure.step("Open homepage"):
-        driver.get("https://www.ppl.cz")
+        print("[INFO] Открываем главную страницу...")
+        page.open()
+        print("[SUCCESS] Главная страница загружена.")
 
     with allure.step("Accept cookies"):
-        cookie_btn = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable(
-                (By.ID, "onetrust-accept-btn-handler")
-            )
-        )
-        cookie_btn.click()
-
-    with allure.step("Find language selector"):
-        language = Select(
-            driver.find_element(
-                By.CSS_SELECTOR,
-                ".language-selector-select"
-            )
-        )
+        print("[INFO] Ожидаем появления и принимаем куки...")
+        page.accept_cookies()
+        print("[SUCCESS] Куки успешно приняты.")
 
     with allure.step("Verify current language"):
-        selected_language = (
-            language.first_selected_option.text.lower()
-        )
+        print("[INFO] Считываем текущий выбранный язык из селектора...")
+        selected_language = page.get_selected_language()
 
-        print("Current language:", selected_language)
+        print(f"[INFO] Фактический выбранный язык на сайте: '{selected_language}'")
 
-        assert selected_language in ["cs", "en"]
+        #  ассерт с понятным сообщением на случай падения
+        allowed_languages = ["cs", "en"]
+        assert selected_language in allowed_languages, \
+            f"Ожидали язык из списка {allowed_languages}, но получили '{selected_language}'"
+
+        print(f"[SUCCESS] Проверка пройдена! Язык '{selected_language}' входит в список разрешенных.")

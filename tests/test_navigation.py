@@ -1,41 +1,37 @@
 import allure
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from pages.homepage_page import HomepagePage
 
 
 @allure.feature("Navigation")
 @allure.story("Main Menu")
 @allure.title("Verify navigation menu and links")
 def test_navigation_links(driver):
+    print("\n[INFO] Старт теста: Проверка главного навигационного меню сайта.")
+    page = HomepagePage(driver)
 
     with allure.step("Open homepage"):
-        driver.get("https://www.ppl.cz/")
+        print("[INFO] Открываем главную страницу...")
+        page.open()
 
     with allure.step("Accept cookies"):
-        cookie_btn = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable(
-                (By.ID, "onetrust-accept-btn-handler")
-            )
-        )
-        cookie_btn.click()
+        print("[INFO] Принимаем куки-файлы...")
+        page.accept_cookies()
 
-    with allure.step("Find menu items"):
-        menu_items = driver.find_elements(
-            By.CSS_SELECTOR,
-            ".navbar__link"
-        )
+    with allure.step("Get navigation links"):
+        print("[INFO] Извлекаем ссылки из пунктов меню...")
+        menu_links = page.get_navigation_links()
 
-        print("Menu items found:", len(menu_items))
+        print(f"[INFO] Количество найденных пунктов меню: {len(menu_links)}")
+        assert len(menu_links) >= 5, \
+            f"Ожидали как минимум 5 пунктов меню, но нашли только {len(menu_links)}"
 
-        assert len(menu_items) >= 5
+    with allure.step("Verify menu links validity"):
+        print("[INFO] Начинаем валидацию URL-адресов...")
+        for href in menu_links:
+            print(f"[INFO] Проверка ссылки: '{href}'")
 
-    with allure.step("Verify menu links"):
-        for item in menu_items:
+            assert href is not None, "Обнаружен пункт меню без атрибута 'href'"
+            assert href.startswith("http"), \
+                f"Ссылка '{href}' некорректна (должна начинаться с http/https)"
 
-            href = item.get_attribute("href")
-
-            print("URL:", href)
-
-            assert href is not None
-            assert href.startswith("http")
+        print("[SUCCESS] Все ссылки меню успешно прошли проверку формата.")
