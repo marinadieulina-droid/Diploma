@@ -1,6 +1,0 @@
-
-[START] test_pickup_points_page
-[SUCCESS] Primary cookies accepted.
-[SUCCESS] Secondary cookies inside Shadow DOM accepted.
-[DATA] Current URL: https://www.ppl.cz/mapa-vydejnich-mist
-[SUCCESS] Страница карты успешно открыта.

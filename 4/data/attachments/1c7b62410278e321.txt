@@ -1,7 +1,0 @@
-
-[START] test_search_by_zip_code
-[SUCCESS] Primary cookies accepted.
-[SUCCESS] Secondary cookies inside Shadow DOM accepted.
-[INFO] Индекс '11000' отправлен в поле поиска.
-[DATA] Ожидалось: 11000 | В поле по факту: 11000
-[SUCCESS] Поиск по ZIP-коду успешно валидирован.

@@ -1,4 +1,0 @@
-
-ВВодим номер отправления: ABC123!!!
-
-Сообщение об ошибке: Povoleny jsou pouze číslice a velká a malá písmena

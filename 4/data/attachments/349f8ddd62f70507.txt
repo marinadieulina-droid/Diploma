@@ -1,4 +1,0 @@
-
-[INFO] Старт теста: Проверка мета-описания страницы.
-[INFO] Получено описание (Description): 'Objevte možnosti zasílání a přijímání soukromých i firemních zásilek s PPL. Vyzkoušejte naše výdejní místa PPL, kde balíky vyzvednete nebo odešlete do Česka i za hranice.'
-[SUCCESS] Мета-описание успешно проверено.
