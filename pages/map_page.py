@@ -125,12 +125,31 @@ class MapPage:
     def click_geolocation_button(self):
         shadow = self.get_shadow_root()
         print(f"[DEBUG] Current URL: {self.driver.current_url}")
-        time.sleep(10)
+        end_time = time.monotonic() + 60
+        while time.monotonic() < end_time:
+            buttons = shadow.find_elements(
+                By.CSS_SELECTOR,
+                "button"
+            )
+            labels = []
+            for btn in buttons:
+                try:
+                    labels.append(
+                        btn.get_attribute("aria-label") or ""
+                    )
+                except Exception:
+                    continue
+            if "Přiblížit" in labels:
+                print("[DEBUG] Map controls loaded.")
+                break
+            print("[DEBUG] Waiting for map controls...")
+            time.sleep(2)
         buttons = shadow.find_elements(
             By.CSS_SELECTOR,
             "button"
         )
         print(f"[DEBUG] Buttons found: {len(buttons)}")
+
         for btn in buttons:
             try:
                 label = btn.get_attribute("aria-label") or ""
@@ -145,9 +164,13 @@ class MapPage:
                     )
                     time.sleep(2)
                     return
+
             except Exception:
                 continue
-        raise TimeoutException(f"Geolocation button not found. URL: {self.driver.current_url}")
+
+        raise TimeoutException(
+            f"Geolocation button not found. URL: {self.driver.current_url}"
+        )
 
     def open_filters_panel(self):
         """Открывает шторку всех фильтров."""

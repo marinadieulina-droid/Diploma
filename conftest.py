@@ -16,7 +16,6 @@ def driver():
         options.add_argument("--disable-gpu")
         # КРИТИЧНО ДЛЯ КАРТ В CI: отключаем запросы разрешений
         options.add_argument("--use-fake-ui-for-media-stream")
-        options.add_argument("--disable-geolocation")
         options.add_argument("--disable-notifications")
 
     options.add_argument("--window-size=1920,1080")
