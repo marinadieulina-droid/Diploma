@@ -1,0 +1,4 @@
+
+[INFO] Старт теста: Проверка Open Graph описания (og:description).
+[INFO] Получен Open Graph Description: 'Objevte možnosti zasílání a přijímání soukromých i firemních zásilek s PPL. Vyzkoušejte naše výdejní místa PPL, kde balíky vyzvednete nebo odešlete do Česka i za hranice.'
+[SUCCESS] Тег og:description успешно проверен.
