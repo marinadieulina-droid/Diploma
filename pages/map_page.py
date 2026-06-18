@@ -123,33 +123,18 @@ class MapPage:
     # --- Методы из предыдущего теста (сохраняем их здесь) ---
 
     def click_geolocation_button(self):
-        """Находит и нажимает кнопку геолокации внутри Shadow DOM."""
-
         shadow = self.get_shadow_root()
-
         print(f"[DEBUG] Current URL: {self.driver.current_url}")
-
-        WebDriverWait(self.driver, 30).until(
-            lambda d: any(
-                btn.get_attribute("aria-label") == "Zjistit polohu"
-                for btn in shadow.find_elements(
-                    By.CSS_SELECTOR,
-                    "button"
-                )
-            )
-        )
-
+        time.sleep(10)
         buttons = shadow.find_elements(
             By.CSS_SELECTOR,
             "button"
         )
-
         print(f"[DEBUG] Buttons found: {len(buttons)}")
-
         for btn in buttons:
             try:
                 label = btn.get_attribute("aria-label") or ""
-
+                print(f"[DEBUG] aria-label: {label}")
                 if label == "Zjistit polohu":
                     self.driver.execute_script(
                         "arguments[0].click();",
@@ -160,13 +145,9 @@ class MapPage:
                     )
                     time.sleep(2)
                     return
-
             except Exception:
                 continue
-
-        raise TimeoutException(
-            f"Geolocation button not found. URL: {self.driver.current_url}"
-        )
+        raise TimeoutException(f"Geolocation button not found. URL: {self.driver.current_url}")
 
     def open_filters_panel(self):
         """Открывает шторку всех фильтров."""
