@@ -65,7 +65,7 @@ class MapPage:
     def get_shadow_root(self):
         """Возвращает и кэширует shadow_root карты стандартным методом Selenium 4."""
         if not self._shadow_root:
-            shadow_host = WebDriverWait(self.driver, 30).until(
+            shadow_host = WebDriverWait(self.driver, 15).until(
                 EC.visibility_of_element_located(self.WIDGET_HOST)
             )
             self._shadow_root = shadow_host.shadow_root
@@ -90,9 +90,7 @@ class MapPage:
             except Exception:
                 pass
             time.sleep(0.5)
-        raise TimeoutException(
-            f"Не удалось найти элемент: {text_substring}. URL: {self.driver.current_url}"
-        )
+        raise TimeoutException(f"Не удалось найти элемент с текстом '{text_substring}' в Shadow DOM")
 
     # --- Новые методы для работы с поисковой строкой ---
 
@@ -125,37 +123,56 @@ class MapPage:
     # --- Методы из предыдущего теста (сохраняем их здесь) ---
 
     def click_geolocation_button(self):
+        """Находит и нажимает кнопку геолокации внутри Shadow DOM."""
+
         shadow = self.get_shadow_root()
 
-        geolocation_button = WebDriverWait(self.driver, 30).until(
-            lambda d: shadow.find_element(
-                By.CSS_SELECTOR,
-                'button[aria-label="Zjistit polohu"]'
+        print(f"[DEBUG] Current URL: {self.driver.current_url}")
+
+        WebDriverWait(self.driver, 30).until(
+            lambda d: any(
+                btn.get_attribute("aria-label") == "Zjistit polohu"
+                for btn in shadow.find_elements(
+                    By.CSS_SELECTOR,
+                    "button"
+                )
             )
         )
 
-        WebDriverWait(self.driver, 10).until(
-            lambda d: geolocation_button.is_displayed()
+        buttons = shadow.find_elements(
+            By.CSS_SELECTOR,
+            "button"
         )
 
-        self.driver.execute_script(
-            "arguments[0].click();",
-            geolocation_button
-        )
+        print(f"[DEBUG] Buttons found: {len(buttons)}")
 
-        print("[SUCCESS] Geolocation button clicked.")
+        for btn in buttons:
+            try:
+                label = btn.get_attribute("aria-label") or ""
+
+                if label == "Zjistit polohu":
+                    self.driver.execute_script(
+                        "arguments[0].click();",
+                        btn
+                    )
+                    print(
+                        "[SUCCESS] Кнопка геолокации успешно отработала."
+                    )
+                    time.sleep(2)
+                    return
+
+            except Exception:
+                continue
+
+        raise TimeoutException(
+            f"Geolocation button not found. URL: {self.driver.current_url}"
+        )
 
     def open_filters_panel(self):
-        filters_btn = self._wait_and_click_by_text(
-            "Všech",
-            timeout=20
-        )
-
-        self.driver.execute_script(
-            "arguments[0].click();",
-            filters_btn
-        )
-        print("[SUCCESS] Filters panel opened.")
+        """Открывает шторку всех фильтров."""
+        filters_btn = self._wait_and_click_by_text("Všech", timeout=12)
+        self.driver.execute_script("arguments[0].click();", filters_btn)
+        time.sleep(2)
 
     def expand_typ_mista_category(self):
         """Раскрывает категорию фильтров 'Typ místa'."""
@@ -169,12 +186,7 @@ class MapPage:
     def select_shop_and_box_filters(self):
         """Находит интерактивные чекбоксы фильтров и активирует Shop и Box."""
         shadow = self.get_shadow_root()
-        filter_options = WebDriverWait(self.driver, 15).until(
-            lambda d: shadow.find_elements(
-                By.CSS_SELECTOR,
-                "input[type='checkbox'], label, button"
-            )
-        )
+        filter_options = shadow.find_elements(By.CSS_SELECTOR, "input[type='checkbox'], label, button")
 
         shop_clicked = False
         box_clicked = False

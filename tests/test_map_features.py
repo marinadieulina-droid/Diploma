@@ -22,7 +22,7 @@ def test_map_features(driver):
     with allure.step("Verify and click geolocation button"):
         print("[INFO] Клик по кнопке определения геолокации...")
         map_page.click_geolocation_button()
-        print("[SUCCESS] Кнопка геолокации успешно отработала.")
+
 
     with allure.step("Open filters panel"):
         print("[INFO] Открытие шторки фильтров...")
