@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","6783","Verify homepage opens successfully","tests","2026-06-18","passed","2026-06-18","","test_homepage","",""
+"","6646","Verify language selector works","tests","2026-06-18","passed","2026-06-18","","test_language_switch","",""
+"","4918","Verify 404 page is displayed","tests","2026-06-18","passed","2026-06-18","","test_404","",""
