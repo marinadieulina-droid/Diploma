@@ -1,0 +1,4 @@
+
+[INFO] Старт теста: Проверка Open Graph заголовка (og:title).
+[INFO] Получен Open Graph Title: 'Flexibilní doručení zásilek | Úvod - PPL CZ'
+[SUCCESS] Тег og:title успешно проверен.
