@@ -52,14 +52,28 @@ class HomepagePage:
         cookie_btn.click()
 
     def get_selected_language(self):
-        """
-        Инициализирует выпадающий список выбора языков и возвращает текущий выбранный язык.
-        Использует распаковку кортежа локатора (*self.LANGUAGE_SELECTOR).
-        :return: Строка с выбранным языком в нижнем регистре (например, 'cs' или 'en').
-        """
         select_element = self.driver.find_element(*self.LANGUAGE_SELECTOR)
         language_dropdown = Select(select_element)
-        return language_dropdown.first_selected_option.text.lower()
+
+        return language_dropdown.first_selected_option.text.strip().lower()
+
+    def switch_language(self, language):
+        """
+        Переключает язык сайта.
+        Поддерживаются значения: 'cs' и 'en'.
+        """
+
+        select_element = self.driver.find_element(*self.LANGUAGE_SELECTOR)
+        language_dropdown = Select(select_element)
+
+        if language == "en":
+            language_dropdown.select_by_value("en_US")
+        elif language == "cs":
+            language_dropdown.select_by_value("cs_CZ")
+        else:
+            raise ValueError(
+                f"Неподдерживаемый язык: {language}"
+            )
 
     # --- Методы для извлечения мета-тегов ---
 
