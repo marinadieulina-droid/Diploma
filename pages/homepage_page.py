@@ -2,6 +2,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 
 
 class HomepagePage:
@@ -74,6 +76,21 @@ class HomepagePage:
             raise ValueError(
                 f"Неподдерживаемый язык: {language}"
             )
+
+    def navigate_with_tab(self, presses=1):
+        """
+        Перемещает фокус по странице с помощью клавиши TAB.
+
+        :param presses: количество нажатий TAB
+        :return: активный элемент после навигации
+        """
+
+        body = self.driver.find_element(By.TAG_NAME, "body")
+
+        for _ in range(presses):
+            body.send_keys(Keys.TAB)
+
+        return self.driver.switch_to.active_element
 
     # --- Методы для извлечения мета-тегов ---
 
