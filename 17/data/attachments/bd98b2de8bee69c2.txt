@@ -1,0 +1,16 @@
+
+=== START TEST: KEYBOARD NAVIGATION ===
+[STEP 1] Opening homepage...
+[PASS] Homepage opened successfully.
+[STEP 2] Accepting cookies...
+[PASS] Cookies accepted.
+[STEP 3] Navigating through page using TAB key...
+[PASS] TAB navigation completed.
+[STEP 4] Checking active element...
+[INFO] Active element tag: a
+[INFO] Active element text: Firmy
+[PASS] Active element found.
+[STEP 5] Verifying active element is enabled...
+[PASS] Active element is enabled.
+=== TEST PASSED: KEYBOARD NAVIGATION ===
+
