@@ -1,5 +1,4 @@
 import allure
-import pytest
 from pages.tracking_page import TrackingPage
 
 @allure.feature("Tracking")
