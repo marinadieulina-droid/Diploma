@@ -1,6 +1,6 @@
 import allure
 from pages.error_page import ErrorPage
-from test_data import EXPECTED_404_TITLE
+from tests.test_data import EXPECTED_404_TITLE
 
 
 @allure.feature("Error Handling")
