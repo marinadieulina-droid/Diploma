@@ -1,6 +1,6 @@
 import allure
 from pages.map_page import MapPage
-from test_data import SEARCH_CITY, SEARCH_ZIP_CODE
+from tests.test_data import SEARCH_CITY, SEARCH_ZIP_CODE
 
 
 @allure.feature("Pickup Points Map")
