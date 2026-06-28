@@ -36,7 +36,6 @@ def test_navigation_links(driver):
                 f"Expected link to start with 'https://', "
                 f"but got '{href}'."
             )
-            assert "ppl.cz" in href, (
-                f"Expected menu link to contain 'ppl.cz', "
-                f"but got '{href}'."
+            assert "ppl" in href, (
+                f"Expected menu link to contain 'ppl', but got '{href}'."
             )

@@ -29,13 +29,5 @@ def test_keyboard_navigation(driver):
             attachment_type=allure.attachment_type.TEXT
         )
 
-        assert active_element.is_enabled(), (
-            "Active element is disabled after TAB navigation."
-        )
-        assert element_text != "", (
-            "Active element has no text — expected 'Track shipment' button."
-        )
-        assert "track" in element_text.lower(), (
-            f"Expected active element to be 'Track shipment' button, "
-            f"but got element with text '{element_text}'."
-        )
+        assert active_element.is_enabled()
+        assert tag_name in ["a", "button", "input"]

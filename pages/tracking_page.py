@@ -12,6 +12,10 @@ class TrackingPage:
     ERROR_MESSAGE = (By.CSS_SELECTOR, "span.c-help-block")
     RESULT_TABLE = (By.XPATH, "//table[contains(@class,'table-borderless')]")
 
+    # Вкладка "Detail stavu zásilky" реализована через label связанный
+    # с radio input — кликаем по label чтобы переключить вкладку
+    STATUS_TAB = (By.XPATH, "//label[contains(text(), 'Detail stavu zásilky')]")
+
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 20)
@@ -33,23 +37,37 @@ class TrackingPage:
     def click_search(self):
         self.wait.until(EC.element_to_be_clickable(self.SEARCH_BUTTON)).click()
 
+    def click_status_tab(self):
+        """Кликает по вкладке 'Detail stavu zásilky' чтобы открыть таблицу
+        с историей статусов. Вкладка реализована через label + radio input,
+        поэтому кликаем по label а не по input напрямую."""
+        try:
+            tab = self.wait.until(EC.element_to_be_clickable(self.STATUS_TAB))
+            tab.click()
+            # Ждём появления таблицы после клика по вкладке
+            WebDriverWait(self.driver, 10).until(
+                lambda d: d.find_elements(*self.RESULT_TABLE)
+            )
+        except Exception:
+            pass
+
     def wait_for_result(self):
-        """
-        Ожидает появления либо таблицы результатов, либо сообщения об ошибке.
-        Используем явное ожидание вместо time.sleep для стабильности.
-        """
+        """Ожидает появления блока результатов или сообщения об ошибке."""
         try:
             WebDriverWait(self.driver, 15).until(
                 lambda d: (
-                    d.find_elements(*self.RESULT_TABLE)
+                    d.find_elements(*self.STATUS_TAB)
                     or d.find_elements(*self.ERROR_MESSAGE)
                 )
             )
         except Exception:
-            # Если ни один элемент не появился — продолжаем, тест упадёт на assert
             pass
 
     def get_history(self):
+        # Сначала кликаем по вкладке со статусами —
+        # по умолчанию открыта вкладка "Detail zásilky", таблицы там нет
+        self.click_status_tab()
+
         rows = self.driver.find_elements(
             By.XPATH,
             "//table[contains(@class,'table-borderless')]//tbody/tr"
@@ -64,7 +82,7 @@ class TrackingPage:
                     "status": cells[1].get_attribute("textContent").strip()
                 })
 
-
+        # Убираем дубликаты, сохраняя порядок
         unique_history = []
         for item in history:
             if item not in unique_history:

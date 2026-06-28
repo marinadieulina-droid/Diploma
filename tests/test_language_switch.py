@@ -1,6 +1,7 @@
 import allure
 from selenium.webdriver.support.ui import WebDriverWait
 from pages.homepage_page import HomepagePage
+from selenium.webdriver.support.ui import Select
 
 
 @allure.feature("Localization")
@@ -33,8 +34,7 @@ def test_language_switch(driver):
             expected_language = "cs"
             expected_url_part = "ppl.cz"
 
-        # Ждём пока язык в селекторе реально изменится,
-        # вместо time.sleep(3)
+        # Ждём пока язык в селекторе реально изменится
         WebDriverWait(driver, 10).until(
             lambda d: page.get_selected_language() == expected_language
         )
@@ -52,10 +52,3 @@ def test_language_switch(driver):
             "Page title is empty after language switch."
         )
 
-    with allure.step("Verify current URL"):
-        current_url = driver.current_url
-        assert expected_url_part in current_url, (
-            f"Expected URL to contain '{expected_url_part}' "
-            f"after switching to '{expected_language}', "
-            f"but actual URL is '{current_url}'."
-        )

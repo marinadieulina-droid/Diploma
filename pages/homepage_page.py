@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import StaleElementReferenceException
 
 
 class HomepagePage:
@@ -43,9 +44,20 @@ class HomepagePage:
         cookie_btn.click()
 
     def get_selected_language(self):
-        select_element = self.driver.find_element(*self.LANGUAGE_SELECTOR)
-        language_dropdown = Select(select_element)
-        return language_dropdown.first_selected_option.text.strip().lower()
+        """Возвращает выбранный язык, повторяя поиск элемента при его обновлении."""
+        for _ in range(3):
+            try:
+                select_element = WebDriverWait(self.driver, 10).until(
+                    EC.presence_of_element_located(self.LANGUAGE_SELECTOR)
+                )
+                language_dropdown = Select(select_element)
+                return language_dropdown.first_selected_option.text.strip().lower()
+            except StaleElementReferenceException:
+                continue
+
+        raise StaleElementReferenceException(
+            "Language selector remained stale after several attempts."
+        )
 
     def switch_language(self, language):
         """
