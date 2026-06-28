@@ -1,4 +1,3 @@
-import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -11,6 +10,7 @@ class TrackingPage:
     SEARCH_BUTTON = (By.CSS_SELECTOR, "button[type='submit']")
     COOKIE_BUTTON = (By.ID, "onetrust-accept-btn-handler")
     ERROR_MESSAGE = (By.CSS_SELECTOR, "span.c-help-block")
+    RESULT_TABLE = (By.XPATH, "//table[contains(@class,'table-borderless')]")
 
     def __init__(self, driver):
         self.driver = driver
@@ -34,10 +34,22 @@ class TrackingPage:
         self.wait.until(EC.element_to_be_clickable(self.SEARCH_BUTTON)).click()
 
     def wait_for_result(self):
-        time.sleep(8)
+        """
+        Ожидает появления либо таблицы результатов, либо сообщения об ошибке.
+        Используем явное ожидание вместо time.sleep для стабильности.
+        """
+        try:
+            WebDriverWait(self.driver, 15).until(
+                lambda d: (
+                    d.find_elements(*self.RESULT_TABLE)
+                    or d.find_elements(*self.ERROR_MESSAGE)
+                )
+            )
+        except Exception:
+            # Если ни один элемент не появился — продолжаем, тест упадёт на assert
+            pass
 
     def get_history(self):
-        # Ожидаем появления таблицы, чтобы не искать пустую
         rows = self.driver.find_elements(
             By.XPATH,
             "//table[contains(@class,'table-borderless')]//tbody/tr"
@@ -52,7 +64,7 @@ class TrackingPage:
                     "status": cells[1].get_attribute("textContent").strip()
                 })
 
-        # Убираем дубликаты сохраняя порядок
+
         unique_history = []
         for item in history:
             if item not in unique_history:

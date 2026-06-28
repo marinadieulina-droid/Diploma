@@ -3,51 +3,40 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
 
 
 class HomepagePage:
     """Класс, представляющий главную страницу сайта PPL (Page Object Model)."""
 
-    # URL страницы, вынесенный в переменную класса для удобства поддержки
     URL = "https://www.ppl.cz"
 
-    # Локаторы элементов главной страницы
     COOKIE_ACCEPT_BTN = (By.ID, "onetrust-accept-btn-handler")
     LANGUAGE_SELECTOR = (By.CSS_SELECTOR, ".language-selector-select")
 
-    # Локаторы для SEO мета-тегов (Xpath)
     META_DESCRIPTION = (By.XPATH, "//meta[@name='description']")
     OG_TITLE = (By.XPATH, "//meta[@property='og:title']")
     OG_DESCRIPTION = (By.XPATH, "//meta[@property='og:description']")
     OG_URL = (By.XPATH, "//meta[@property='og:url']")
 
-    # Новый локатор: пункты навигационного меню в шапке сайта
     MENU_ITEMS = (By.CSS_SELECTOR, ".navbar__link")
 
+    # Количество нажатий TAB для достижения кнопки "Track shipment".
+    # Значение 5 определено экспериментально по структуре DOM главной страницы:
+    # 1 — логотип, 2 — меню «Zásilky», 3 — меню «Služby», 4 — переключатель языка,
+    # 5 — кнопка «Track shipment» в шапке.
+    # При изменении разметки это значение нужно пересмотреть.
+    TAB_PRESSES_TO_TRACK_BUTTON = 5
+
     def __init__(self, driver):
-        """
-        Конструктор класса.
-        :param driver: Экземпляр WebDriver, переданный из теста.
-        """
         self.driver = driver
 
     def open(self):
-        """Открывает главную страницу в браузере с помощью сохраненного драйвера."""
         self.driver.get(self.URL)
 
     def get_title(self):
-        """
-        Запрашивает у браузера заголовок (title) текущей активной вкладки.
-        :return: Строка с текстом заголовка страницы.
-        """
         return self.driver.title
 
     def accept_cookies(self):
-        """
-        Ожидает появление всплывающего баннера кук и кликает на кнопку согласия.
-        Использует явное ожидание (Explicit Wait) до 10 секунд.
-        """
         cookie_btn = WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable(self.COOKIE_ACCEPT_BTN)
         )
@@ -56,7 +45,6 @@ class HomepagePage:
     def get_selected_language(self):
         select_element = self.driver.find_element(*self.LANGUAGE_SELECTOR)
         language_dropdown = Select(select_element)
-
         return language_dropdown.first_selected_option.text.strip().lower()
 
     def switch_language(self, language):
@@ -64,7 +52,6 @@ class HomepagePage:
         Переключает язык сайта.
         Поддерживаются значения: 'cs' и 'en'.
         """
-
         select_element = self.driver.find_element(*self.LANGUAGE_SELECTOR)
         language_dropdown = Select(select_element)
 
@@ -73,57 +60,44 @@ class HomepagePage:
         elif language == "cs":
             language_dropdown.select_by_value("cs_CZ")
         else:
-            raise ValueError(
-                f"Неподдерживаемый язык: {language}"
-            )
+            raise ValueError(f"Unsupported language: '{language}'. Use 'cs' or 'en'.")
 
-    def navigate_with_tab(self, presses=1):
+    def navigate_with_tab(self, presses=None):
         """
-        Перемещает фокус по странице с помощью клавиши TAB.
+        Перемещает фокус по странице клавишей TAB.
 
-        :param presses: количество нажатий TAB
-        :return: активный элемент после навигации
+        :param presses: количество нажатий TAB.
+                        По умолчанию — TAB_PRESSES_TO_TRACK_BUTTON.
+        :return: активный элемент после навигации.
         """
+        if presses is None:
+            presses = self.TAB_PRESSES_TO_TRACK_BUTTON
 
         body = self.driver.find_element(By.TAG_NAME, "body")
-
         for _ in range(presses):
             body.send_keys(Keys.TAB)
 
         return self.driver.switch_to.active_element
 
-    # --- Методы для извлечения мета-тегов ---
-
     def get_meta_description(self):
-        """Находит тег description и возвращает значение его атрибута content."""
         element = self.driver.find_element(*self.META_DESCRIPTION)
         return element.get_attribute("content")
 
     def get_og_title(self):
-        """Находит тег og:title и возвращает значение его атрибута content."""
         element = self.driver.find_element(*self.OG_TITLE)
         return element.get_attribute("content")
 
     def get_og_description(self):
-        """Находит тег og:description и возвращает значение его атрибута content."""
         element = self.driver.find_element(*self.OG_DESCRIPTION)
         return element.get_attribute("content")
 
     def get_og_url(self):
-        """Находит тег og:url и возвращает значение его атрибута content."""
         element = self.driver.find_element(*self.OG_URL)
         return element.get_attribute("content")
 
-    # --- Новый метод для навигационного меню ---
-
     def get_navigation_links(self):
         """
-        Находит все пункты меню и собирает значения их атрибутов 'href'.
-        :return: Список (list) строк с URL-адресами ссылок меню.
+        Возвращает список href всех пунктов навигационного меню.
         """
         elements = self.driver.find_elements(*self.MENU_ITEMS)
-        links = []
-        for el in elements:
-            href = el.get_attribute("href")
-            links.append(href)
-        return links
+        return [el.get_attribute("href") for el in elements]

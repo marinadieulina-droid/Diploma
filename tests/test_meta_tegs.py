@@ -6,7 +6,6 @@ from pages.homepage_page import HomepagePage
 @allure.story("Page Title")
 @allure.title("Verify page title")
 def test_page_title(driver):
-    print("\n[INFO] Старт теста: Проверка заголовка страницы.")
     page = HomepagePage(driver)
 
     with allure.step("Open homepage"):
@@ -14,18 +13,18 @@ def test_page_title(driver):
 
     with allure.step("Verify page title text"):
         title = page.get_title()
-        print(f"[INFO] Получен заголовок: '{title}'")
-
-        assert title != "", "Заголовок страницы пустой"
-        assert "PPL" in title, f"Ожидали увидеть 'PPL' в заголовке, но получили '{title}'"
-        print("[SUCCESS] Заголовок страницы успешно проверен.")
+        assert title != "", (
+            "Page title is empty."
+        )
+        assert "PPL" in title, (
+            f"Expected 'PPL' in page title, but got '{title}'."
+        )
 
 
 @allure.feature("Meta Tags")
 @allure.story("Meta Description")
 @allure.title("Verify meta description")
 def test_meta_description(driver):
-    print("\n[INFO] Старт теста: Проверка мета-описания страницы.")
     page = HomepagePage(driver)
 
     with allure.step("Open homepage"):
@@ -33,17 +32,18 @@ def test_meta_description(driver):
 
     with allure.step("Verify meta description content"):
         description = page.get_meta_description()
-        print(f"[INFO] Получено описание (Description): '{description}'")
-
-        assert description != "", "Мета-описание страницы пустое"
-        print("[SUCCESS] Мета-описание успешно проверено.")
+        assert description != "", (
+            "Meta description is empty."
+        )
+        assert "PPL" in description, (
+            f"Expected 'PPL' in meta description, but got '{description}'."
+        )
 
 
 @allure.feature("Meta Tags")
 @allure.story("Open Graph")
 @allure.title("Verify Open Graph title")
 def test_og_title(driver):
-    print("\n[INFO] Старт теста: Проверка Open Graph заголовка (og:title).")
     page = HomepagePage(driver)
 
     with allure.step("Open homepage"):
@@ -51,17 +51,18 @@ def test_og_title(driver):
 
     with allure.step("Verify og:title content"):
         title = page.get_og_title()
-        print(f"[INFO] Получен Open Graph Title: '{title}'")
-
-        assert title != "", "Тег og:title пустой"
-        print("[SUCCESS] Тег og:title успешно проверен.")
+        assert title != "", (
+            "og:title tag is empty."
+        )
+        assert "PPL" in title, (
+            f"Expected 'PPL' in og:title, but got '{title}'."
+        )
 
 
 @allure.feature("Meta Tags")
 @allure.story("Open Graph")
 @allure.title("Verify Open Graph description")
 def test_og_description(driver):
-    print("\n[INFO] Старт теста: Проверка Open Graph описания (og:description).")
     page = HomepagePage(driver)
 
     with allure.step("Open homepage"):
@@ -69,17 +70,18 @@ def test_og_description(driver):
 
     with allure.step("Verify og:description content"):
         description = page.get_og_description()
-        print(f"[INFO] Получен Open Graph Description: '{description}'")
-
-        assert description != "", "Тег og:description пустой"
-        print("[SUCCESS] Тег og:description успешно проверен.")
+        assert description != "", (
+            "og:description tag is empty."
+        )
+        assert "PPL" in description, (
+            f"Expected 'PPL' in og:description, but got '{description}'."
+        )
 
 
 @allure.feature("Meta Tags")
 @allure.story("Open Graph")
 @allure.title("Verify Open Graph URL")
 def test_og_url(driver):
-    print("\n[INFO] Старт теста: Проверка Open Graph URL (og:url).")
     page = HomepagePage(driver)
 
     with allure.step("Open homepage"):
@@ -87,7 +89,12 @@ def test_og_url(driver):
 
     with allure.step("Verify og:url content"):
         url = page.get_og_url()
-        print(f"[INFO] Получен Open Graph URL: '{url}'")
-
-        assert url != "", "Тег og:url пустой"
-        print("[SUCCESS] Тег og:url успешно проверен.")
+        assert url != "", (
+            "og:url tag is empty."
+        )
+        assert url.startswith("https://"), (
+            f"Expected og:url to start with 'https://', but got '{url}'."
+        )
+        assert "ppl.cz" in url, (
+            f"Expected 'ppl.cz' in og:url, but got '{url}'."
+        )
