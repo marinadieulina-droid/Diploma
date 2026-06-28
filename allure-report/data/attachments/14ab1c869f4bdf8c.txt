@@ -1,7 +1,0 @@
-
-[START] test_search_by_city
-[SUCCESS] Primary cookies accepted.
-[SUCCESS] Secondary cookies inside Shadow DOM accepted.
-[INFO] Значение города 'Praha' отправлено в поле поиска.
-[DATA] Ожидалось: Praha | В поле по факту: Praha
-[SUCCESS] Поиск по городу успешно валидирован.
