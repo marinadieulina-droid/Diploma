@@ -21,7 +21,23 @@
               "",
               "pm.test(\"Response time is less than 500 ms\", function () {",
               "    pm.expect(pm.response.responseTime).to.be.below(500);",
+              "});",
+              "",
+              "pm.test(\"Content-Type header is HTML\", function () {",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\"))",
+              "        .to.include(\"text/html\");",
               "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
             ],
             "type": "text/javascript",
             "packages": {},

@@ -6,7 +6,6 @@ from tests.test_data import (
     INVALID_FORMAT_TRACKING_NUMBER,
     EXPECTED_ERROR_KEYWORD,
 )
-
 @allure.feature("Tracking")
 @allure.story("Valid tracking number")
 @allure.title("Verify shipment tracking history")
